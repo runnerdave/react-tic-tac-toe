@@ -55,6 +55,7 @@ class Game extends React.Component {
             }],
             stepNumber: 0,
             xIsNext: true,
+            moveDescription: ''
         };
     }
 
@@ -71,7 +72,8 @@ class Game extends React.Component {
                 squares: squares,
             }]),
             stepNumber: history.length,
-            xIsNext: !this.state.xIsNext
+            xIsNext: !this.state.xIsNext,
+            moveDescription: `${getCoordinates(i)}: ${squares[i]}`
         });
     }
 
@@ -86,10 +88,13 @@ class Game extends React.Component {
         const history = this.state.history;
         const current = history[this.state.stepNumber];
         const winner = calculateWinner(current.squares);
-
+        const currentMoveDescriptionClone = {...this.state.moveDescription};
+        console.log(currentMoveDescriptionClone);
+        const currentMoveDescription = Object.values(currentMoveDescriptionClone).join('');
+        console.log(currentMoveDescription);
         const moves = history.map((step, move) => {
             const desc = move ?
-                'Move #' + move :
+                'Move ' + currentMoveDescription:
                 'Game start';
             return (
                 <li key={move}>
@@ -147,4 +152,27 @@ function calculateWinner(squares) {
         }
     }
     return null;
+}
+
+function getMatchingIndex(array, targetValue) {
+    return array.findIndex((d) => d === targetValue);
+}
+
+function getCoordinates(value) {
+    let myArr = [
+        [0, 1, 2],
+        [3, 4, 5],
+        [6, 7, 8]
+    ];
+
+    let x = 0;
+    let y = 0;
+    for (let i = 0; i < myArr.length; i++) {
+        let index = getMatchingIndex(myArr[i], value);
+        if (index !== -1) {
+            y = i + 1;
+            x = index + 1;
+        }
+    }
+    return `(${x},${y})`;
 }
