@@ -55,7 +55,8 @@ class Game extends React.Component {
             }],
             stepNumber: 0,
             xIsNext: true,
-            moveDescription: ''
+            moveDescription: '',
+            moveDetails: new Map()
         };
     }
 
@@ -67,13 +68,15 @@ class Game extends React.Component {
             return;
         }
         squares[i] = this.state.xIsNext ? 'X' : 'O';
+        const updatedMoveDetails = this.state.moveDetails.set(this.state.stepNumber, this.state.moveDescription);
         this.setState({
             history: history.concat([{
                 squares: squares,
             }]),
             stepNumber: history.length,
             xIsNext: !this.state.xIsNext,
-            moveDescription: `${getCoordinates(i)}: ${squares[i]}`
+            moveDescription: `${getCoordinates(i)}: ${squares[i]}`,
+            moveDetails: updatedMoveDetails
         });
     }
 
@@ -88,13 +91,10 @@ class Game extends React.Component {
         const history = this.state.history;
         const current = history[this.state.stepNumber];
         const winner = calculateWinner(current.squares);
-        const currentMoveDescriptionClone = {...this.state.moveDescription};
-        console.log(currentMoveDescriptionClone);
-        const currentMoveDescription = Object.values(currentMoveDescriptionClone).join('');
-        console.log(currentMoveDescription);
+        console.log('in render: ', this.state.moveDetails);
         const moves = history.map((step, move) => {
             const desc = move ?
-                'Move ' + currentMoveDescription:
+                'Move ' + this.state.moveDetails.get(move):
                 'Game start';
             return (
                 <li key={move}>
