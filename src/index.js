@@ -53,24 +53,34 @@ class Game extends React.Component {
             }],
             stepNumber: 0,
             xIsNext: true,
-            toggleAscending: true
+            toggleAscending: true,
+            moveDescription: '',
+            moveDetails: new Map()
         };
     }
 
     handleClick(i) {
-        const history = this.state.history.slice(0, this.state.stepNumber + 1);
+        const currentStepNumber = this.state.stepNumber + 1;
+        const history = this.state.history.slice(0, currentStepNumber);
         const current = history[history.length - 1];
         const squares = current.squares.slice();
         if (calculateWinner(squares) || squares[i]) {
             return;
         }
         squares[i] = this.state.xIsNext ? 'X' : 'O';
+        const currentMoveDescription = `${getCoordinates(i)}: ${squares[i]}`;
+
+
+        const updatedMoveDetails = this.state.moveDetails.set(currentStepNumber, currentMoveDescription);
+
         this.setState({
             history: history.concat([{
                 squares: squares,
             }]),
             stepNumber: history.length,
-            xIsNext: !this.state.xIsNext
+            xIsNext: !this.state.xIsNext,
+            moveDescription: currentMoveDescription,
+            moveDetails: updatedMoveDetails
         });
     }
 
@@ -93,10 +103,10 @@ class Game extends React.Component {
         const history = this.state.history;
         const current = history[this.state.stepNumber];
         const winner = calculateWinner(current.squares);
-
+        console.log('in render: ', this.state.moveDetails);
         const moves = history.map((step, move) => {
             const desc = move ?
-                'Move #' + move :
+                'Move ' + this.state.moveDetails.get(move):
                 'Game start';
 
             let bold = (move === this.state.stepNumber ? 'selected-move' : '');
@@ -166,4 +176,27 @@ function calculateWinner(squares) {
         }
     }
     return null;
+}
+
+function getMatchingIndex(array, targetValue) {
+    return array.findIndex((d) => d === targetValue);
+}
+
+function getCoordinates(value) {
+    let myArr = [
+        [0, 1, 2],
+        [3, 4, 5],
+        [6, 7, 8]
+    ];
+
+    let x = 0;
+    let y = 0;
+    for (let i = 0; i < myArr.length; i++) {
+        let index = getMatchingIndex(myArr[i], value);
+        if (index !== -1) {
+            y = i + 1;
+            x = index + 1;
+        }
+    }
+    return `(${x},${y})`;
 }
