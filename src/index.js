@@ -69,8 +69,6 @@ class Game extends React.Component {
         }
         squares[i] = this.state.xIsNext ? 'X' : 'O';
         const currentMoveDescription = `${getCoordinates(i)}: ${squares[i]}`;
-
-
         const updatedMoveDetails = this.state.moveDetails.set(currentStepNumber, currentMoveDescription);
 
         this.setState({
@@ -103,7 +101,6 @@ class Game extends React.Component {
         const history = this.state.history;
         const current = history[this.state.stepNumber];
         const winner = calculateWinner(current.squares);
-        console.log('in render: ', this.state.moveDetails);
         const moves = history.map((step, move) => {
             const desc = move ?
                 'Move ' + this.state.moveDetails.get(move):
