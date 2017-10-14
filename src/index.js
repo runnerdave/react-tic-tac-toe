@@ -61,21 +61,26 @@ class Game extends React.Component {
     }
 
     handleClick(i) {
-        const history = this.state.history.slice(0, this.state.stepNumber + 1);
+        const currentStepNumber = this.state.stepNumber + 1;
+        const history = this.state.history.slice(0, currentStepNumber);
         const current = history[history.length - 1];
         const squares = current.squares.slice();
         if (calculateWinner(squares) || squares[i]) {
             return;
         }
         squares[i] = this.state.xIsNext ? 'X' : 'O';
-        const updatedMoveDetails = this.state.moveDetails.set(this.state.stepNumber, this.state.moveDescription);
+        const currentMoveDescription = `${getCoordinates(i)}: ${squares[i]}`;
+
+
+        const updatedMoveDetails = this.state.moveDetails.set(currentStepNumber, currentMoveDescription);
+        
         this.setState({
             history: history.concat([{
                 squares: squares,
             }]),
             stepNumber: history.length,
             xIsNext: !this.state.xIsNext,
-            moveDescription: `${getCoordinates(i)}: ${squares[i]}`,
+            moveDescription: currentMoveDescription,
             moveDetails: updatedMoveDetails
         });
     }
