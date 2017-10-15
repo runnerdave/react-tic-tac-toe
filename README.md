@@ -43,5 +43,5 @@ below are extra tasks to do in order to master this tutorial:
 * Bold the currently-selected item in the move list. (done)
 * Rewrite Board to use two loops to make the squares instead of hardcoding them. (done)
 * Add a toggle button that lets you sort the moves in either ascending or descending order. (done)
-* When someone wins, highlight the three squares that caused the win. (almost done)
+* When someone wins, highlight the three squares that caused the win. (done)
 

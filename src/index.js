@@ -123,7 +123,7 @@ class Game extends React.Component {
 
         let status;
         if (winners) {
-            status = 'Winner: ' + history[winners[0]];
+            status = 'Winner: ' + current.squares[winners[0]];
         } else {
             status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
         }
