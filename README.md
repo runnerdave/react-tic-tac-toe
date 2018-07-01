@@ -50,14 +50,14 @@ below are extra tasks to do in order to master this tutorial:
 ### Build the image
 
 ````
-$docker build -t tic-tac-toe:0.2.0 .
+$docker build -t tic-tac-toe:0.3.0 .
 ````
 
 ### running the container
 
 #### simple:
 ````
-$docker run -p 3000:3000 -d --name react-tutorial tic-tac-toe:0.2.0
+$docker run -p 3000:3000 -d --name react-tutorial tic-tac-toe:0.3.0
 ````
 remove the container:
 ````
@@ -67,7 +67,7 @@ $docker rm react-tutorial
 
 #### interactive background (-d detached mode):
 ````
-$docker container run -it -p 3000:3000 --rm --name react-tutorial -d tic-tac-toe:0.2.0
+$docker container run -it -p 3000:3000 --rm --name react-tutorial -d tic-tac-toe:0.3.0
 ````
 display the rolling logs for the app:
 ````
