@@ -1,11 +1,12 @@
 {
   "name": "tic-tac-toe",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "private": false,
   "dependencies": {
-    "react": "^15.6.2",
-    "react-dom": "^15.6.2",
-    "react-scripts": "1.0.13"
+    "ajv": "^6.5.2",
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1",
+    "react-scripts": "^1.1.4"
   },
   "scripts": {
     "start": "react-scripts start",
