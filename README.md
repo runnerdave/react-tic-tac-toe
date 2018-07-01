@@ -35,7 +35,7 @@ It correctly bundles React in production mode and optimizes the build for the be
 The build is minified and the filenames include the hashes.<br>
 Your app is ready to be deployed!
 
-## TODO:
+## TODOs:
 
 below are extra tasks to do in order to master this tutorial:
 
@@ -45,3 +45,35 @@ below are extra tasks to do in order to master this tutorial:
 * Add a toggle button that lets you sort the moves in either ascending or descending order. (done)
 * When someone wins, highlight the three squares that caused the win. (done)
 
+## Dockerization:
+
+### Build the image
+
+````
+$docker build -t tic-tac-toe:0.2.0 .
+````
+
+### running the container
+
+#### simple:
+````
+$docker run -p 3000:3000 -d --name react-tutorial tic-tac-toe:0.2.0
+````
+remove the container:
+````
+$docker container stop react-tutorial
+$docker rm react-tutorial
+````
+
+#### interactive background (-d detached mode):
+````
+$docker container run -it -p 3000:3000 --rm --name react-tutorial -d tic-tac-toe:0.2.0
+````
+display the rolling logs for the app:
+````
+$docker container logs -f react-tutorial
+````
+stop the container:
+````
+$docker container stop react-tutorial
+````

@@ -1,7 +1,7 @@
 {
   "name": "tic-tac-toe",
-  "version": "0.1.0",
-  "private": true,
+  "version": "0.2.0",
+  "private": false,
   "dependencies": {
     "react": "^15.6.2",
     "react-dom": "^15.6.2",
@@ -11,5 +11,10 @@
     "start": "react-scripts start",
     "build": "react-scripts build"
   },
-  "homepage": "/tic-tac-toe"
+  "homepage": "http://davidajimenez.com/tic-tac-toe/",
+  "repository": {
+    "url": "https://github.com/runnerdave/react-tic-tac-toe",
+    "type": "git"
+  },
+  "license": "MIT"
 }
